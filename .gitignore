@@ -1,0 +1,19 @@
+# PyCharm IDE
+env/
+
+# Migration Directory
+
+### Django ###
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+db.sqlite3
+media
+.idea/
+
+### macOS ###
+*.DS_Store
+.AppleDouble
+.LSOverride
