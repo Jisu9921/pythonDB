@@ -85,3 +85,33 @@ def delete_schedule_dynamo(request):
         )
     result = dict(msg=1)
     return HttpResponse(json.dumps(result), content_type="application/json")
+
+
+def insert_dynamo(sheet_schedules):
+    table = dynamodb.Table('schedule')
+    for data in sheet_schedules:
+        table.put_item(
+            Item={
+                'id': str(uuid.uuid4()),
+                'chaneel': data['Channel'],
+                'program_title': data['ProgramTitle'],
+                'start_time': data['StartTime'],
+                'end_time': data['EndTime']
+            }
+        )
+
+
+def get_dynamo():
+    table = dynamodb.Table('schedule')
+    schedule = table.scan()['Items']
+
+
+def delete_dynamo():
+    table = dynamodb.Table('schedule')
+    schedule = table.scan()['Items']
+    for data in schedule:
+        table.delete_item(
+            Key={
+                'id': data['id']
+            }
+        )

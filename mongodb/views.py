@@ -34,3 +34,25 @@ def delete_schedule_mongo(request):
     schedule.delete_many({})
     result = dict(msg=1)
     return HttpResponse(json.dumps(result), content_type="application/json")
+
+
+def insert_mongo(sheet_schedules):
+    schedule = mongo_db.schedule
+    for data in sheet_schedules:
+        schedule_info = {
+            "channel": data['Channel'],
+            "program_title": data['ProgramTitle'],
+            "start_time": data['StartTime'],
+            "end_time": data['EndTime']
+        }
+        schedule.insert_one(schedule_info)
+
+
+def get_mongo():
+    schedule = mongo_db.schedule
+    schedule.find()
+
+
+def delete_mongo():
+    schedule = mongo_db.schedule
+    schedule.delete_many({})
