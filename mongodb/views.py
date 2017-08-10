@@ -24,8 +24,7 @@ def insert_schedule_mongo(request):
 
 def get_schedule_mongo(request):
     schedule = mongo_db.schedule
-    for data in schedule.find():
-        print(data)
+    schedule.find()
     result = dict(msg=1)
     return HttpResponse(json.dumps(result), content_type="application/json")
 

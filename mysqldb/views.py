@@ -22,8 +22,6 @@ def get_schedule_mysql(request):
     conn = pymysql.connect(host='localhost', user='root', password='1234', db='pymysql', charset='utf8mb4')
     cur = conn.cursor()
     cur.execute("SELECT * FROM schedule")
-    for row in cur:
-        print(row)
     cur.close()
     conn.close()
     result = dict(msg=1)
