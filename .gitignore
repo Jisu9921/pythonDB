@@ -3,6 +3,10 @@ env/
 
 # Migration Directory
 
+# Google API Credentials
+.credentials/
+client_secret.json
+
 ### Django ###
 *.log
 *.pot
