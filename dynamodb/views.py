@@ -1,18 +1,44 @@
 from django.http import HttpResponse
-from django.shortcuts import render
 import boto3
 import json
+dynamodb = boto3.resource('dynamodb')
 
 
-def dynamo_index(request):
-    # Get the service resource.
-    dynamodb = boto3.resource('dynamodb')
-    table = dynamodb.Table('users')
-    table.delete_item(
-        Key={
-            'username': 'janedoe',
-            'last_name': 'Doe'
+def create_table_dynamon(request):
+    table = dynamodb.create_table(
+        TableName='schedule',
+        KeySchema=[
+            {
+                'AttributeName': 'id',
+                'KeyType': 'HASH'
+            },
+        ],
+        AttributeDefinitions=[
+            {
+                'AttributeName': 'id',
+                'AttributeType': 'N'
+            },
+        ],
+        ProvisionedThroughput={
+            'ReadCapacityUnits': 5,
+            'WriteCapacityUnits': 5
         }
     )
-    print(table.item_count)
-    return render(request, 'view/dynamo.html')
+    table.meta.client.get_waiter('table_exists').wait(TableName='schedule')
+    result = dict(msg=1)
+    return HttpResponse(json.dumps(result), content_type="application/json")
+
+
+def insert_schedule_dynamo(request):
+    result = dict(msg=1)
+    return HttpResponse(json.dumps(result), content_type="application/json")
+
+
+def get_schedule_dynamo(request):
+    result = dict(msg=1)
+    return HttpResponse(json.dumps(result), content_type="application/json")
+
+
+def delete_schedule_dynamo(request):
+    result = dict(msg=1)
+    return HttpResponse(json.dumps(result), content_type="application/json")
