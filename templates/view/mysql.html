@@ -19,7 +19,7 @@
             var data = {
                 name: $('#name_mysql').val()
             };
-            $.post('/mysql/', data, function (data) {
+            $.post('/mysqldb/', data, function (data) {
                 if (data.msg == 1) {
                     alert('성공');
                 } else {

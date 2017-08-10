@@ -18,6 +18,8 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^', include('scheduler.urls')),
     url(r'^mongodb/', include('mongodb.urls')),
     url(r'^mysqldb/', include('mysqldb.urls')),
+    url(r'^dynamodb/', include('dynamodb.urls')),
 ]
